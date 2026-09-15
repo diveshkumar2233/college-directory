@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>College Directory</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">Admissions Data — India</p>
+  <h1>College Directory</h1>
+  <p>Choose a program, location, admission style, and budget below to see matching colleges from our directory.</p>
+</header>
+
+<section class="matchmaker" aria-labelledby="matchmakerTitle">
+  <div class="matchmaker-copy">
+    <p class="eyebrow">AI College Matchmaker</p>
+    <h2 id="matchmakerTitle">Generate a personalized college list</h2>
+    <p>Choose your preferred program, location, admission style, and budget to see relevant colleges from our directory.</p>
+  </div>
+  <form class="matchmaker-form" id="matchmakerForm">
+    <div class="form-grid">
+      <label class="sr-only" for="programFilter">Preferred program or major</label>
+      <select id="programFilter" name="program" required aria-required="true">
+        <option value="" disabled selected>Select preferred program or major</option>
+        <option value="B.Tech">B.Tech / Engineering</option>
+        <option value="MBA">MBA / Management</option>
+        <option value="BBA">BBA</option>
+        <option value="MBBS">MBBS / Medical</option>
+        <option value="BCA">BCA / Computer Applications</option>
+        <option value="B.Com">B.Com / Commerce</option>
+        <option value="BA">BA / Arts</option>
+        <option value="Law">Law</option>
+        <option value="Hospitality">Hospitality</option>
+      </select>
+
+      <label class="sr-only" for="locationFilter">Location</label>
+      <select id="locationFilter" name="location">
+        <option value="">All locations</option>
+      </select>
+
+      <label class="sr-only" for="admissionFilter">Admission style</label>
+      <select id="admissionFilter" name="admission">
+        <option value="">Admission style</option>
+        <option value="Direct Admission">Direct admission</option>
+        <option value="Entrance">Entrance exam</option>
+        <option value="Management Quota">Management quota</option>
+        <option value="Merit">Merit-based</option>
+      </select>
+
+      <label class="sr-only" for="budgetFilter">Total course budget</label>
+      <select id="budgetFilter" name="budget">
+        <option value="">Select total course budget</option>
+        <option value="3">Up to ₹3 lakh</option>
+        <option value="6">Up to ₹6 lakh</option>
+        <option value="10">Up to ₹10 lakh</option>
+        <option value="15">Up to ₹15 lakh</option>
+        <option value="25">Up to ₹25 lakh</option>
+      </select>
+    </div>
+
+    <label class="sr-only" for="notesFilter">Marks, timeline, or concerns</label>
+    <textarea id="notesFilter" name="notes" placeholder="Share marks, timeline, or concerns"></textarea>
+
+    <button type="submit">✦&nbsp; Generate College List</button>
+    <p class="form-note" id="formMsg">Your selections filter the college directory below.</p>
+  </form>
+</section>
+
+<div class="count-row">
+  <span id="resultCount"></span>
+  <span>Fees shown are approximate, as reported.</span>
+</div>
+
+<div class="loading" id="loadingState">Loading colleges…</div>
+<div class="grid" id="grid"></div>
+<div class="empty" id="emptyState" style="display:none;">No colleges match your selections. Try a different program, location, or budget.</div>
+
+<script src="js/app.js?v=4"></script>
+</body>
+</html>
