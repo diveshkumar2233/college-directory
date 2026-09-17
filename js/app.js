@@ -68,13 +68,32 @@ function renderCard(c){
 }
 
 function populateLocations(){
-  const options = document.getElementById("locationOptions");
   const locs = Array.from(new Set(COLLEGES.map(c => c.location).filter(Boolean))).sort();
+  const select = document.getElementById("locationFilter");
   locs.forEach(loc => {
-    const opt = document.createElement("option");
-    opt.value = loc;
-    options.appendChild(opt);
+    const option = document.createElement("option");
+    option.value = loc;
+    option.textContent = loc;
+    select.appendChild(option);
   });
+}
+
+function setupLocationSelect(onChange){
+  if(!window.jQuery || !window.jQuery.fn.select2) return;
+  const $location = window.jQuery("#locationFilter");
+  const formatLocation = state => {
+    if(!state.id) return state.text;
+    return window.jQuery("<span class='location-result'><span class='location-pin' aria-hidden='true'>⌖</span></span>")
+      .append(document.createTextNode(state.text));
+  };
+
+  $location.select2({
+    placeholder: "Search or select location (optional)",
+    allowClear: true,
+    width: "100%",
+    templateResult: formatLocation,
+    templateSelection: formatLocation
+  }).on("select2:select select2:clear", onChange);
 }
 
 function clearResults(){
@@ -169,6 +188,8 @@ async function init(){
         document.getElementById("formMsg").textContent = "Select a course to generate your college list.";
       }
     };
+
+    setupLocationSelect(updateResultsFromForm);
 
     form.addEventListener("submit", event => {
       event.preventDefault();

@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>College Directory</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -37,8 +38,9 @@
       </select>
 
       <label class="sr-only" for="locationFilter">Location</label>
-      <input id="locationFilter" name="location" list="locationOptions" type="search" placeholder="Search location (optional)" autocomplete="off">
-      <datalist id="locationOptions"></datalist>
+      <select id="locationFilter" name="location" class="location-select">
+        <option value=""></option>
+      </select>
 
       <label class="sr-only" for="admissionFilter">Admission style</label>
       <select id="admissionFilter" name="admission">
@@ -77,6 +79,8 @@
 <div class="grid" id="grid" hidden></div>
 <div class="empty" id="emptyState" style="display:none;">No colleges match your selections. Try a different program, location, or budget.</div>
 
-<script src="js/app.js?v=6"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="js/app.js?v=8"></script>
 </body>
 </html>

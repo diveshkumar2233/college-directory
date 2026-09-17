@@ -85,6 +85,25 @@ header p{
 }
 .matchmaker-form textarea{min-height:156px;resize:vertical;margin-top:12px;}
 .matchmaker-form input:focus,.matchmaker-form select:focus,.matchmaker-form textarea:focus{outline:2px solid #7a7ce8;outline-offset:1px;}
+.select2-container{font-family:'Inter',sans-serif;}
+.select2-container--default .select2-selection--single{
+  height:54px;
+  padding:11px 42px 11px 20px;
+  border:1px solid #d9d0cb;
+  border-radius:12px;
+  background:#f5f3f2;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered{padding:0;color:var(--ink);line-height:30px;}
+.select2-container--default .select2-selection--single .select2-selection__placeholder{color:var(--muted);}
+.select2-container--default .select2-selection--single .select2-selection__arrow{height:52px;right:13px;}
+.select2-container--default.select2-container--focus .select2-selection--single{border-color:#7a7ce8;box-shadow:0 0 0 2px rgba(122,124,232,.22);}
+.select2-dropdown{border:1px solid #d9d0cb;border-radius:12px;overflow:hidden;box-shadow:0 12px 28px rgba(28,43,58,.16);}
+.select2-search--dropdown{padding:10px;background:#fff;border-bottom:1px solid var(--line);}
+.select2-container--default .select2-search--dropdown .select2-search__field{padding:10px 12px;border:1px solid #d9d0cb;border-radius:8px;font:inherit;}
+.select2-results__option{padding:10px 14px;color:var(--ink);}
+.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable{background:#eef3f1;color:var(--teal);}
+.location-result{display:flex;align-items:center;gap:9px;}
+.location-pin{color:var(--teal);font-size:17px;line-height:1;}
 .matchmaker-form button{
   justify-self:center;
   margin-top:12px;
