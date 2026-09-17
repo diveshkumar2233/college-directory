@@ -37,9 +37,8 @@
       </select>
 
       <label class="sr-only" for="locationFilter">Location</label>
-      <select id="locationFilter" name="location">
-        <option value="">All locations</option>
-      </select>
+      <input id="locationFilter" name="location" list="locationOptions" type="search" placeholder="Search location (optional)" autocomplete="off">
+      <datalist id="locationOptions"></datalist>
 
       <label class="sr-only" for="admissionFilter">Admission style</label>
       <select id="admissionFilter" name="admission">
@@ -69,15 +68,15 @@
   </form>
 </section>
 
-<div class="count-row">
+<div class="count-row" id="resultSummary" hidden>
   <span id="resultCount"></span>
   <span>Fees shown are approximate, as reported.</span>
 </div>
 
 <div class="loading" id="loadingState">Loading colleges…</div>
-<div class="grid" id="grid"></div>
+<div class="grid" id="grid" hidden></div>
 <div class="empty" id="emptyState" style="display:none;">No colleges match your selections. Try a different program, location, or budget.</div>
 
-<script src="js/app.js?v=4"></script>
+<script src="js/app.js?v=6"></script>
 </body>
 </html>

@@ -68,14 +68,22 @@ function renderCard(c){
 }
 
 function populateLocations(){
-  const sel = document.getElementById("locationFilter");
+  const options = document.getElementById("locationOptions");
   const locs = Array.from(new Set(COLLEGES.map(c => c.location).filter(Boolean))).sort();
   locs.forEach(loc => {
     const opt = document.createElement("option");
     opt.value = loc;
-    opt.textContent = loc;
-    sel.appendChild(opt);
+    options.appendChild(opt);
   });
+}
+
+function clearResults(){
+  const grid = document.getElementById("grid");
+  grid.innerHTML = "";
+  grid.hidden = true;
+  document.getElementById("emptyState").style.display = "none";
+  document.getElementById("resultCount").textContent = "";
+  document.getElementById("resultSummary").hidden = true;
 }
 
 function renderResults(matches){
@@ -83,8 +91,10 @@ function renderResults(matches){
   const empty = document.getElementById("emptyState");
   const msg = document.getElementById("formMsg");
 
+  document.getElementById("resultSummary").hidden = false;
   document.getElementById("resultCount").textContent = `${matches.length} of ${COLLEGES.length} colleges`;
   empty.style.display = matches.length ? "none" : "block";
+  grid.hidden = !matches.length;
   grid.innerHTML = matches.map(renderCard).join("");
 
   if(msg){
@@ -147,11 +157,25 @@ async function init(){
     COLLEGES = await res.json();
     loadingEl.style.display = "none";
     populateLocations();
-    applyMatchmakerFilters(false); // show all colleges initially
+    clearResults(); // Results are shown only after the visitor submits the form.
+    document.getElementById("formMsg").textContent = "Select a course to generate your college list.";
 
-    document.getElementById("matchmakerForm").addEventListener("submit", event => {
+    const form = document.getElementById("matchmakerForm");
+    const updateResultsFromForm = () => {
+      if(document.getElementById("programFilter").value){
+        applyMatchmakerFilters(false);
+      } else {
+        clearResults();
+        document.getElementById("formMsg").textContent = "Select a course to generate your college list.";
+      }
+    };
+
+    form.addEventListener("submit", event => {
       event.preventDefault();
       applyMatchmakerFilters(true);
+    });
+    form.querySelectorAll("select, input").forEach(field => {
+      field.addEventListener("change", updateResultsFromForm);
     });
   } catch(err){
     loadingEl.textContent = "Could not load college data. Make sure you're running this via a local server (see README), not by double-clicking the file.";
