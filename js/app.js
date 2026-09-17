@@ -78,7 +78,7 @@ function populateLocations(){
   });
 }
 
-function setupLocationSelect(onChange){
+function setupLocationSelect(){
   if(!window.jQuery || !window.jQuery.fn.select2) return;
   const $location = window.jQuery("#locationFilter");
   const formatLocation = state => {
@@ -89,11 +89,11 @@ function setupLocationSelect(onChange){
 
   $location.select2({
     placeholder: "Search or select location (optional)",
-    allowClear: true,
+    allowClear: false,
     width: "100%",
     templateResult: formatLocation,
     templateSelection: formatLocation
-  }).on("select2:select select2:clear", onChange);
+  });
 }
 
 function clearResults(){
@@ -180,23 +180,11 @@ async function init(){
     document.getElementById("formMsg").textContent = "Select a course to generate your college list.";
 
     const form = document.getElementById("matchmakerForm");
-    const updateResultsFromForm = () => {
-      if(document.getElementById("programFilter").value){
-        applyMatchmakerFilters(false);
-      } else {
-        clearResults();
-        document.getElementById("formMsg").textContent = "Select a course to generate your college list.";
-      }
-    };
-
-    setupLocationSelect(updateResultsFromForm);
+    setupLocationSelect();
 
     form.addEventListener("submit", event => {
       event.preventDefault();
       applyMatchmakerFilters(true);
-    });
-    form.querySelectorAll("select, input").forEach(field => {
-      field.addEventListener("change", updateResultsFromForm);
     });
   } catch(err){
     loadingEl.textContent = "Could not load college data. Make sure you're running this via a local server (see README), not by double-clicking the file.";
